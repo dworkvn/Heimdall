@@ -26,12 +26,8 @@ Pod::Spec.new do |s|
   s.source_files    = "Heimdall/*"
   s.requires_arc    = true
 
-  s.xcconfig        = { 'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/iphonesimulator/',
-                        'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/iphoneos/',
-                        'SWIFT_INCLUDE_PATHS[sdk=appletvos*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvos/',
-                        'SWIFT_INCLUDE_PATHS[sdk=appletvsimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvsimulator/',
-"SWIFT_INCLUDE_PATHS" => "${PODS_ROOT}/IDZSwiftCommonCrypto/Frameworks/$(PLATFORM_NAME)",
-  "FRAMEWORK_SEARCH_PATHS" => "${PODS_ROOT}/IDZSwiftCommonCrypto/Frameworks/$(PLATFORM_NAME)"
+  s.xcconfig        = { "SWIFT_INCLUDE_PATHS" => "${PODS_ROOT}/Heimdall/Frameworks/$(PLATFORM_NAME)",
+  "FRAMEWORK_SEARCH_PATHS" => "${PODS_ROOT}/Heimdall/Frameworks/$(PLATFORM_NAME)"
 }
 
 s.prepare_command = <<-CMD
@@ -51,15 +47,6 @@ s.prepare_command = <<-CMD
   $SWIFT ./GenerateCommonCryptoModule.swift appletvos .
   $SWIFT ./GenerateCommonCryptoModule.swift watchsimulator .
   $SWIFT ./GenerateCommonCryptoModule.swift watchos .
-
-                        mkdir -p CommonCrypto/iphoneos
-                        mkdir -p CommonCrypto/iphonesimulator
-                        mkdir -p CommonCrypto/appletvos
-                        mkdir -p CommonCrypto/appletvsimulator
-                        cp CommonCrypto/iphoneos.modulemap CommonCrypto/iphoneos/module.modulemap
-                        cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/iphonesimulator/module.modulemap
-                        cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/appletvos/module.modulemap
-                        cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/appletvsimulator/module.modulemap
 CMD
 
 end
