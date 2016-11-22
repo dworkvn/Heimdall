@@ -31,6 +31,25 @@ Pod::Spec.new do |s|
                         'SWIFT_INCLUDE_PATHS[sdk=appletvos*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvos/',
                         'SWIFT_INCLUDE_PATHS[sdk=appletvsimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvsimulator/' }
 
+s.prepare_command = <<-CMD
+  touch prepare_command.txt
+  echo 'Running prepare_command'
+  pwd
+  echo Running GenerateCommonCryptoModule
+  # This was needed to ensure the correct Swift interpreter was 
+  # used in Xcode 8. Leaving it here, commented out, in case similar 
+  # issues occur when migrating to Swift 4.0.
+  #TC="--toolchain com.apple.dt.toolchain.Swift_2_3"
+  SWIFT="xcrun $TC swift"
+  $SWIFT ./GenerateCommonCryptoModule.swift macosx .
+  $SWIFT ./GenerateCommonCryptoModule.swift iphonesimulator .
+  $SWIFT ./GenerateCommonCryptoModule.swift iphoneos .
+  $SWIFT ./GenerateCommonCryptoModule.swift appletvsimulator .
+  $SWIFT ./GenerateCommonCryptoModule.swift appletvos .
+  $SWIFT ./GenerateCommonCryptoModule.swift watchsimulator .
+  $SWIFT ./GenerateCommonCryptoModule.swift watchos .
+CMD
+
   s.prepare_command = <<-CMD
                         mkdir -p CommonCrypto/iphoneos
                         mkdir -p CommonCrypto/iphonesimulator
