@@ -22,14 +22,17 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/dworkvn/Heimdall.git", :branch => 'fix/missing-common-ctypto' }
 
-  s.preserve_paths  = "CommonCrypto/*"
+  s.preserve_paths  = "CommonCrypto/*","Frameworks"
   s.source_files    = "Heimdall/*"
   s.requires_arc    = true
 
   s.xcconfig        = { 'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/iphonesimulator/',
                         'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/iphoneos/',
                         'SWIFT_INCLUDE_PATHS[sdk=appletvos*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvos/',
-                        'SWIFT_INCLUDE_PATHS[sdk=appletvsimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvsimulator/' }
+                        'SWIFT_INCLUDE_PATHS[sdk=appletvsimulator*]' => '$(PODS_ROOT)/Heimdall/CommonCrypto/appletvsimulator/',
+"SWIFT_INCLUDE_PATHS" => "${PODS_ROOT}/IDZSwiftCommonCrypto/Frameworks/$(PLATFORM_NAME)",
+  "FRAMEWORK_SEARCH_PATHS" => "${PODS_ROOT}/IDZSwiftCommonCrypto/Frameworks/$(PLATFORM_NAME)"
+}
 
 s.prepare_command = <<-CMD
   touch prepare_command.txt
