@@ -48,9 +48,7 @@ s.prepare_command = <<-CMD
   $SWIFT ./GenerateCommonCryptoModule.swift appletvos .
   $SWIFT ./GenerateCommonCryptoModule.swift watchsimulator .
   $SWIFT ./GenerateCommonCryptoModule.swift watchos .
-CMD
 
-  s.prepare_command = <<-CMD
                         mkdir -p CommonCrypto/iphoneos
                         mkdir -p CommonCrypto/iphonesimulator
                         mkdir -p CommonCrypto/appletvos
@@ -59,6 +57,6 @@ CMD
                         cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/iphonesimulator/module.modulemap
                         cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/appletvos/module.modulemap
                         cp CommonCrypto/iphonesimulator.modulemap CommonCrypto/appletvsimulator/module.modulemap
-                        CMD
+CMD
 
 end
