@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/henrinormak/Heimdall.git", :tag => s.version.to_s }
+  s.source       = { :git => "https://github.com/dworkvn/Heimdall.git", :branch => 'fix/missing-common-ctypto' }
 
   s.preserve_paths  = "CommonCrypto/*"
   s.source_files    = "Heimdall/*"
